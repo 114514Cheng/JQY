@@ -159,6 +159,7 @@
         <div class="tabs">
             <div class="tab active" onclick="showLoginForm()">登录</div>
             <div class="tab" onclick="showRegisterForm()">注册</div>
+            <div class="tab" onclick="showManagerRegisterForm()">管理员注册</div>
         </div>
         <div class="form-container" id="loginForm">
             <h2>登录</h2>
@@ -202,12 +203,43 @@
                 <input type="submit" value="注册">
             </form>
         </div>
+        
+        <div class="form-container" id="registerManagerForm" style="display: none;">
+            <h2>管理员注册</h2>
+            <form action="${pageContext.request.contextPath}/ManagerRegisterServlet" method="post">
+                <label for="username">用户名:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">密码:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <label for="email">邮箱:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="telnumber">电话:</label>
+                <input type="text" id="telnumber" name="telnumber" required>
+                
+                <label for="gender">性别:</label>
+                <select id="gender" name="gender" required>
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                    <option value="other">其他</option>
+                    <option value="prefer_not_to_say">不愿透露</option>
+                </select>
+                
+                <label for="innercode">管理员代码:</label>
+                <input type="text" id="innercode" name="innercode" required>
+                
+                <input type="submit" value="注册">
+            </form>
+        </div>
     </div>
 
     <script>
         function showLoginForm() {
             document.getElementById("loginForm").style.display = "block";
             document.getElementById("registerForm").style.display = "none";
+            document.getElementById("registerManagerForm").style.display = "none";
             document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
             document.querySelector(".tab:nth-child(1)").classList.add("active");
         }
@@ -215,8 +247,17 @@
         function showRegisterForm() {
             document.getElementById("loginForm").style.display = "none";
             document.getElementById("registerForm").style.display = "block";
+            document.getElementById("registerManagerForm").style.display = "none";
             document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
             document.querySelector(".tab:nth-child(2)").classList.add("active");
+        }
+        
+        function showManagerRegisterForm() {
+        	document.getElementById("loginForm").style.display = "none";
+            document.getElementById("registerForm").style.display = "none";
+            document.getElementById("registerManagerForm").style.display = "block";
+            document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+            document.querySelector(".tab:nth-child(3)").classList.add("active");
         }
     </script>
 </body>

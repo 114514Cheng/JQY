@@ -166,6 +166,7 @@
             if (spotId && spotId !== "") {
                 fetchSightDetail(spotId);
                 fetchSightImageAndVideo(spotId);
+                fetchComments(spotId);
             } else {
                 console.error("Invalid spotId");
             }
@@ -253,7 +254,27 @@
                 })
                 .catch(error => console.error('Error fetching facilities and crowd details:', error));
         }
+        
+        function fetchComments(spotId) {
+            const url = '${pageContext.request.contextPath}/SightCommentServlet?id=' + encodeURIComponent(spotId);
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network error: ' + response.statusText);
+                    }
+                    return response.text(); // 先获取文本内容
+                })
+                .then(text => {
+                    console.log('Response text:', text); // 打印响应文本
+                    return JSON.parse(text); // 然后解析为 JSON
+                })
+                .then(data => {
+                    displayComments(data);
+                })
+                .catch(error => console.error('Error fetching comments:', error));
+        }
 
+		
         function bookAppointment() {
             const appointmentForm = document.getElementById('appointmentForm');
             const appointmentTab = document.getElementById('appointment');
@@ -315,6 +336,36 @@
                 facilitiesContainer.innerHTML = '<p>No facilities and crowd details found.</p>';
             }
         }
+        
+        function displayComments(data){
+        	const commentContainer = document.getElementById('commentContainer');
+        	
+        	if(data && data.length > 0){
+        		commentContainer.innerHTML = '';
+        		
+        		data.forEach(item =>{
+        			const url = '${pageContext.request.contextPath}/GetUserByIdServlet?id=' + encodeURIComponent(item.userId);
+        			fetch(url)
+        				.then(response =>{
+        					if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.json();
+        				})
+        				.then(userName =>{
+        					const paragraph = document.createElement('p');
+                			paragraph.innerHTML = '<strong>'+userName+'</strong>: '+item.content;
+                			commentContainer.appendChild(paragraph);
+        				})
+        				.catch(error => {
+        			        console.error('Error fetching user details:', error);
+        			    });
+        			
+        		});
+        	}else{
+        		commentContainer.innerHTML = '<p>No comments found! </p>';
+        	}
+        }
     </script>
 </head>
 <body>
@@ -330,6 +381,8 @@
         <div class="tab">设施</div>
         <div class="tab" onclick="bookAppointment()">预约</div>
         <div class="tab">视频</div>
+        <div class="tab">评论</div>
+        
     </div>
 
     <div id="overview" class="tab-content active"></div>
@@ -387,7 +440,7 @@
     
     </div>
     <div id="videoContainer" class="tab-content"></div>
-
+	<div id="commentContainer" class="tab-content"></div>
     
 </body>
 </html>
