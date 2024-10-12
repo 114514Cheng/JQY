@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
+
+    <persistence-unit name="TravelProject" transaction-type="JTA"> 
+        <jta-data-source>java:jboss/datasources/MySqlDS</jta-data-source>
+        <class>entity.User</class>
+        <class>entity.Sight</class>
+        <class>entity.Reservation</class>
+        <class>entity.Facility</class>
+        <class>entity.Ref_sight_facility</class>
+        <class>entity.Sight_detail</class>
+        <class>entity.Ticket</class>
+        <class>entity.Innercode</class>
+        <class>entity.SightComment</class>
+        <properties>
+            <!-- Hibernate Properties -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>
