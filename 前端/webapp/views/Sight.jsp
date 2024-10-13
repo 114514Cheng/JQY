@@ -4,161 +4,198 @@
 <head>
     <meta charset="UTF-8">
     <title>Sight Detail</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/CNfont.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .topbar {
-            height: 50px;
-            width: 100%;
-            position: sticky;
-            top: 0;
-            left: 0;
-            background-color: #fff;
-            padding-top: 20px;
-            text-align: center;
-            color: #000;
+    body {
+        font-family: 'CNfont',Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .topbar {
+        height: 50px;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        padding-top: 20px;
+        text-align: center;
+        font-size:20px;
+        color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .topbar a {
+        display: block;
+        padding: 10px;
+        color: #000;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        height: 100%;
+        line-height: 50px;
+        margin: 0 10px;
+    }
+    
+    .topbar a:hover {
+        background-color: #555;
+        color: #fff;
+        border-radius: 3px;
+    }
+    
+    .image-gallery {
+        width: 100%;
+        height: 700px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .image-gallery img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .artistic-text {
+        position: absolute;
+        width: 10%; /* Decrease artistic text size */
+        height: auto;
+        bottom: 20px; /* Adjust position */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .tabs {
+        display: flex;
+        justify-content: center;
+        background-color: #f8f8f8;
+        border-bottom: 1px solid #ccc;
+        position: sticky;
+        top: 0;
+        font-size:20px;
+        z-index: 1000;
+        margin: 0 auto; /* Center align tabs */
+        max-width: 1300px; /* Limit tabs width */
+    }
+    
+    .tab {
+        flex: 1; /* Equal width tabs */
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s, border-bottom 0.3s;
+    }
+    
+    .tab.active {
+        background-color: white;
+        border-bottom: 2px solid #d2b48c;
+    }
+    
+    .tab:hover {
+        background-color: #e7e7e7;
+    }
+    
+    .tab-content {
+    display: none;
+    padding: 20px;
+    text-align: center;
+    font-size:32px;
+    margin: 20px auto; /* 设置自动居中 */
+    max-width: 1300px; /* 限制最大宽度，防止文字占满整个屏幕 */
+    background-color: transparent; /* 移除背景颜色 */
+    border: none; /* 移除边框 */
+    box-shadow: none; /* 移除阴影 */
+}
+
+    
+    .tab-content.active {
+        display: block;
+    }
+    
+    .video-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    #appointmentForm {
+        display: none;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        max-width: 400px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    #appointmentForm label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    
+    #appointmentForm select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    #appointmentForm button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    #appointmentForm button:hover {
+        background-color: #45a049;
+    }
+    
+    .carousel {
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-        
-        .topbar a {
-            display: block;
-            padding: 10px;
-            color: #000;
-            text-decoration: none;
-            transition: background-color 0.3s;
-            height: 100%;
-            line-height: 50px;
-            margin: 0 10px;
-        }
-        
-        .topbar a:hover {
-            background-color: #555;
-            color: #fff;
-            border-radius: 3px;
-        }
-        
-        .image-gallery {
-            width: 100%;
-            height: 400px;
-            overflow: hidden;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px; /* 限制最大宽度 */
             position: relative;
         }
-        
-        .image-gallery img {
-            width: 100%;
-            height: 160%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .artistic-text {
-            position: absolute;
-            width: 10%; /* 减小艺术字 */
-            height: auto;
-            bottom: 20px; /* 调整位置 */
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .tabs {
-            display: flex;
-            justify-content: center;
-            background-color: #f8f8f8;
-            border-bottom: 1px solid #ccc;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .tab {
-            flex: 0 0 15%;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s, border-bottom 0.3s;
-            border-right: 1px solid #ccc;
-        }
-        
-        .tab:last-child {
-            border-right: none;
-        }
-        
-        .tab.active {
-            background-color: white;
-            border-bottom: 2px solid #d2b48c;
-        }
-        
-        .tab:hover {
-            background-color: #e7e7e7;
-        }
-        
-        .tab-content {
-            display: none;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid #ccc;
-            margin-top: 20px;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .video-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        
-        #appointmentForm {
-		    display: none;
-		    margin: 20px auto;
-		    padding: 20px;
-		    border: 1px solid #ccc;
-		    border-radius: 5px;
-		    background-color: #f9f9f9;
-		    max-width: 400px;
-		    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		}
-		
-		#appointmentForm label {
-		    display: block;
-		    margin-bottom: 10px;
-		    font-weight: bold;
-		}
-		
-		#appointmentForm select {
-		    width: 100%;
-		    padding: 8px;
-		    margin-bottom: 10px;
-		    border: 1px solid #ccc;
-		    border-radius: 4px;
-		}
-		
-		#appointmentForm button {
-		    display: block;
-		    width: 100%;
-		    padding: 10px;
-		    background-color: #4CAF50;
-		    color: white;
-		    border: none;
-		    border-radius: 4px;
-		    cursor: pointer;
-		    font-size: 16px;
-		}
-		
-		#appointmentForm button:hover {
-		    background-color: #45a049;
-		}
 
-    </style>
+        .carousel img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel img.active {
+            transform: scale(1.1);
+        }
+
+        .carousel img:not(.active) {
+            opacity: 0.5; /* 降低不活跃图像的透明度 */
+        }
+
+        .comment-section {
+            max-width: 800px; /* 限制评论部分的最大宽度 */
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+</style>
     <script>
         window.onload = function() {
             const spotId = '<%= request.getParameter("spotId") %>';
@@ -173,6 +210,31 @@
             setupTabs();
         };
 
+        let currentImageIndex = 0;
+        let imageInterval;
+
+        function displayCarousel(images) {
+            const carouselContainer = document.getElementById('carouselContainer');
+            carouselContainer.className = 'carousel';
+
+            carouselContainer.innerHTML = ''; 
+
+            images.forEach((imageSrc, index) => {
+                const img = document.createElement('img');
+                img.src = imageSrc;
+                img.className = index === 0 ? 'active' : '';
+                carouselContainer.appendChild(img);
+            });
+
+
+            imageInterval = setInterval(() => {
+                const images = carouselContainer.querySelectorAll('img');
+                images[currentImageIndex].classList.remove('active');
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                images[currentImageIndex].classList.add('active');
+            }, 3000); 
+        }
+        
         function fetchSightDetail(spotId) {
             const url = '${pageContext.request.contextPath}/SightDetailServlet?id=' + encodeURIComponent(spotId);
             fetch(url)
@@ -203,32 +265,44 @@
                 .catch(error => console.error('Error fetching sight detail:', error));
         }
 
-        function displaySightImageAndVideo(sight_detail){
+        function displaySightImageAndVideo(sight_detail) {
             const imageGallery = document.getElementById('imageGallery');
             const videoContainer = document.getElementById('videoContainer');
-            
+
             // 添加视频
             const videoPath = sight_detail[0].video;
             const video = document.createElement('video');
             video.controls = true;
             const source = document.createElement('source');
-            source.src = '${pageContext.request.contextPath}'+videoPath;
+            source.src = '${pageContext.request.contextPath}' + videoPath;
             source.type = 'video/mp4';
             video.appendChild(source);
             videoContainer.appendChild(video);
-            
+
+            // 添加主要图片
             const image = document.createElement('img');
-            image.src = '${pageContext.request.contextPath}'+sight_detail[0].image;
+            image.src = '${pageContext.request.contextPath}' + sight_detail[0].image;
             image.alt = 'Sight Image';
             imageGallery.appendChild(image);
-            
+
             // 添加中文艺术字图
-            const artisticText = document.createElement('img');
-            artisticText.src = '${pageContext.request.contextPath}'+sight_detail[1].image;
+            /* const artisticText = document.createElement('img');
+            artisticText.src = '${pageContext.request.contextPath}' + sight_detail[1].image;
             artisticText.alt = 'Artistic Text';
             artisticText.className = 'artistic-text';
-            imageGallery.appendChild(artisticText);
+            imageGallery.appendChild(artisticText); */
+
+            // 添加轮播图图片
+            const carouselImages = [];
+            for (let i = 0; i < 3; i++) {
+                carouselImages.push('${pageContext.request.contextPath}' + sight_detail[0].image); // Replace with actual image sources if needed
+            }
+
+            // 调用轮播函数
+            displayCarousel(carouselImages);
         }
+
+        
 
         function displaySightDetail(sight) {
             const spotId = '<%= request.getParameter("spotId") %>';
@@ -339,7 +413,6 @@
         
         function displayComments(data){
         	const commentContainer = document.getElementById('commentContainer');
-        	
         	if(data && data.length > 0){
         		commentContainer.innerHTML = '';
         		
@@ -381,7 +454,7 @@
         <div class="tab">设施</div>
         <div class="tab" onclick="bookAppointment()">预约</div>
         <div class="tab">视频</div>
-        <div class="tab">评论</div>
+        
         
     </div>
 
@@ -440,7 +513,8 @@
     
     </div>
     <div id="videoContainer" class="tab-content"></div>
-	<div id="commentContainer" class="tab-content"></div>
+    <div id="carouselContainer"></div>
+	<div id="commentContainer" class="comment-section"></div>
     
 </body>
 </html>

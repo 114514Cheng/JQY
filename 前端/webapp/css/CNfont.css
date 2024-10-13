@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'CNfont'; /* 这里是你自定义的字体名称 */
+    src: url('../fonts/CNfont.woff2') format('woff2'); /* 引用你的 woff2 字体文件 */
+    font-weight: normal;
+    font-style: normal;
+}
