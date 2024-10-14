@@ -23,10 +23,17 @@ public class LoginBean implements LoginBeanLocal {
     }
 
 	@Override
-	public boolean login(String name, String password) {
+	public int login(String name, String password) {
 		// TODO Auto-generated method stub
-		boolean res = userDao.login(name,password);
-		return res;
+		int res = userDao.login(name,password);
+		return res;//返回0代表没有对应用户，返回1代表用户被ban，返回2代表一切正常；
+	}
+
+	@Override
+	public boolean loginManager(String name, String password) {
+		// TODO Auto-generated method stub
+		boolean res = userDao.loginManager(name,password);
+		return res;//返回0代表没有对应用户，返回1代表用户被ban，返回2代表一切正常；
 	}
 
 }

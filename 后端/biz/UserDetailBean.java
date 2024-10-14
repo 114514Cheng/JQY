@@ -46,4 +46,14 @@ public class UserDetailBean {
 	public String getUserById(int userid) {
 		return userDao.getUserById(userid);
 	}
+	
+	public List<User> getUsers(){
+		return userDao.getUsers();
+	}
+	public boolean banUser(int userid) {
+		return userDao.banUser(userid);
+	}
+	public boolean unBanUser(int userid) {
+		return userDao.unBanUser(userid);
+	}
 }
