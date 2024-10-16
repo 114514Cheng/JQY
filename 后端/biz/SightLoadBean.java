@@ -10,6 +10,8 @@ import dao.SightDao;
 import dto.SightDTO;
 import entity.Sight;
 import entity.SightComment;
+import entity.SightDisplay;
+import entity.SightSearch;
 import entity.Sight_detail;
 
 /**
@@ -40,5 +42,13 @@ public class SightLoadBean {
 	
 	public List<SightComment> getSightComments(int sightid){
 		return sightDao.getComments(sightid);
+	}
+
+	public List<SightDisplay> getAllSights() {
+		return sightDao.getAllSights();
+	}
+
+	public SightSearch searchSight(String input) {
+		return sightDao.searchSight(input);
 	}
 }

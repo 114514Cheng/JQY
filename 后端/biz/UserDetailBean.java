@@ -32,10 +32,10 @@ public class UserDetailBean {
     public boolean resetPass(String name,String newpass) {
     	return userDao.resetPass(name,newpass);
     }
-	public boolean alter(String name, String pasString, String genderString, String emailString) {
+	public boolean alter(String name, String pasString, String genderString, String emailString,String telString) {
 		// TODO Auto-generated method stub
 		
-		return userDao.alter(name,pasString,genderString,emailString);
+		return userDao.alter(name,pasString,genderString,emailString,telString);
 	}
 	public List<Reser_ref>getResv_ref(int userid) {
 		// TODO Auto-generated method stub
@@ -55,5 +55,11 @@ public class UserDetailBean {
 	}
 	public boolean unBanUser(int userid) {
 		return userDao.unBanUser(userid);
+	}
+	public List<Reser_ref> getHistory(int userid) {
+		return userDao.getHistory(userid);
+	}
+	public boolean cancelRes(int resid) {
+		return userDao.cancelRes(resid);
 	}
 }

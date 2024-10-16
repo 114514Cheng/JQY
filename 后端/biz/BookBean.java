@@ -32,7 +32,7 @@ public class BookBean {
         // TODO Auto-generated constructor stub
     }
 
-    public boolean book(String username,int sightid,String bookdate) {
+    public int book(String username,int sightid,String bookdate) {
     	User user = userDao.getUserDetail(username);
     	Sight sight = sightDao.getSight(sightid);
     	return sightDao.book(user,sight,bookdate);
